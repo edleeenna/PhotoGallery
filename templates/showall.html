@@ -1,0 +1,67 @@
+<div class="row-offcanvas row-offcanvas-left">
+  <div id="sidebar" class="sidebar-offcanvas">
+    <div class="col-md-12">
+      <h3>Sort:</h3>
+      <div class="radio">
+        <p><input type="radio" value="earliest" name="earliest" data-ng-click="asc = false" data-ng-model="objOrder" id="earliest"/></p>
+        <label for="earliest">Earliest</label>
+      </div>
+      <div class="radio">
+        <p><input type="radio" value="latest" name="latest" data-ng-click="asc = true"  data-ng-model="objOrder" id="latest" ></p>
+        <label for="latest">Latest</label>
+      </div>
+      <h3>Search:</h3>
+      <input type="text" name="search" id="search" placeholder="Search..." data-ng-model="query">
+    </div>
+  </div>
+  <div id="main">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <br>
+          <h1>Photo Gallery</h1>
+        </div>
+      </div>
+      <div class="row display-flex" data-ng-controller="getCtrl">
+        <div class="col-md-3 col-sm-6" data-ng-repeat="photo in obj | filter: query | orderBy: ['date']:asc">
+          <div class="thumbnail clearfix">
+            <img class="img-responsive" data-ng-src="{{photo.url}}" alt="{{photo.description}}">
+            <div class="caption">
+              <p data-ng-init="id = photo.id"></p>
+              <h3>{{photo.title}}</h3>
+              <p>Description: {{photo.description}}</p>
+              <p>Date: {{photo.date | date:'dd MMM yyyy'}}</p>
+              <p>Tags: {{photo.keywords}}</p>
+              <div class="row">
+                <div class="col-sm-6">
+                  <a href="#!edit/{{photo.id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edit</a>
+                </div>
+                <div class="col-sm-6">
+                  <a href="#" data-ng-click="delData(id)" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span>Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="successModal" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="successModal">Success!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                   <p>Image has been deleted!</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-ng-click="refresh()" data-dismiss="modal">Ok</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </div>
+  </div>
+</div>

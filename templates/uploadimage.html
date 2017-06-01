@@ -1,0 +1,88 @@
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <br>
+                <h1>Photo Gallery - Upload an Image</h1>
+              </div>
+            </div>
+            <div class="row">
+              <form name="myForm" id="myForm" class="form-horizontal" novalidate="novalidate">
+                <fieldset>
+                  <div class="form-group" data-ng-class="{'has-error': myForm.title.$invalid, 'has-success': myForm.title.$valid}">
+                    <label class="control-label col-sm-2" for="title">Title:</label>
+                    <div class="col-sm-5">
+                      <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" data-ng-model="photo.title" required>
+                    </div>
+                    <div class="col-sm-5">
+                     <p data-ng-show="myForm.title.$error.required" >Title is required</p>
+                    </div>
+                  </div>
+                  <div class="form-group" data-ng-class="{'has-error': myForm.description.$invalid, 'has-success': myForm.description.$valid}">
+
+                    <label class="control-label col-sm-2" for="description">Description: </label>
+                    <div class="col-sm-5">
+                      <input type="text" class="form-control" id="description" name="description" placeholder="Enter description" data-ng-model="photo.description" required>
+                    </div>
+                    <div class="col-sm-5">
+                     <p data-ng-show="myForm.description.$error.required">Description is required</p>
+                    </div>
+                  </div>
+                  <div class="form-group" data-ng-class="{'has-error': myForm.date.$invalid, 'has-success': myForm.date.$valid}">
+                    <label class="control-label col-sm-2" for="date">Date: </label>
+                    <div class="col-sm-5">
+
+                      <input type="text" class="form-control" id="date" placeholder="yyyy-mm-dd" name="date" data-ng-model="photo.date" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" required>
+                    </div>
+                    <div class="col-sm-5">
+                    <p data-ng-show="myForm.date.$error.required">Date is required</p>
+                    <p data-ng-show="myForm.date.$error.pattern">Please enter date in the required format</p>
+                    </div>
+                  </div>
+                  <div class="form-group" data-ng-class="{'has-error': myForm.url.$invalid, 'has-success': myForm.url.$valid}">
+                    <label class="control-label col-sm-2" for="url">URL: </label>
+                    <div class="col-sm-5">
+
+                      <input type="url" class="form-control" id="url" placeholder="https://" name="url" data-ng-model="photo.url" pattern="https?://.+" required>
+                    </div>
+                    <div class="col-sm-5">
+                      <p data-ng-show="myForm.url.$error.pattern">Please match the required format</p>
+                    <p data-ng-show="myForm.url.$error.required">URL is required</p>
+                    </div>
+                  </div>
+                   <div class="form-group" data-ng-class="{'has-error': myForm.keywords.$invalid, 'has-success': myForm.keywords.$valid}">
+                    <label class="control-label col-sm-2" for="keywords">Keywords: </label>
+                    <div class="col-sm-5">
+
+                      <input type="text" class="form-control" id="keywords" placeholder="Keywords" name="keywords" data-ng-model="photo.keywords" required>
+                   </div>
+                     <div class="col-sm-5">
+                      <p data-ng-show="myForm.keywords.$error.required">Keywords is required</p>
+                     </div>
+                  </div>
+                </fieldset>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default" data-ng-click="postData(photo.title, photo.description, photo.date, photo.url, photo.keywords)" data-toggle="modal" data-target="#myModal" data-ng-disabled="myForm.$invalid">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="successModal" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="successModal">Success!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                   <p>Image uploaded successfully</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-ng-click="reset()" data-dismiss="modal">Ok</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
